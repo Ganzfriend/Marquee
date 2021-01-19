@@ -26,7 +26,9 @@ class Marquee extends React.Component {
   }
 
   componentDidMount() {
-    //this.getListingFromServer();
+    if (this.state.displayRecord === null) {
+      this.getListingFromServer();
+    }
   }
 
   render() {

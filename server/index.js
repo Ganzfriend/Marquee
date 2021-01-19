@@ -22,9 +22,11 @@ app.get('/listing/:listingId', (req, res) => {
   query.findOne((err, record) => {
     if(err) {
       console.log('error retrieving record: ', err);
+      res.status.send('Error fetching listing from database: ', err);
     } else if (record) {
       res.send(record);
     }
+    //TODO add 404 if query succeeds but record is empty
   })
 });
 
