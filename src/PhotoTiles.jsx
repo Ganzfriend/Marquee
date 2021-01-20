@@ -23,6 +23,29 @@ const useStyles = makeStyles((theme) => ({
   var PhotoTiles = (props) => {
     const classes = useStyles();
     var photosList = props.listing;
+
+    if (photosList === null) {
+      return (
+        <div>
+          <GridList cellHeight={160} cols={3} rows={2}>
+            <GridListTile cols={2} rows={2}>
+              <Skeleton variant="rect" />
+            </GridListTile>
+            <GridListTile cols={1} rows={1}>
+              <Skeleton variant="rect" />
+            </GridListTile>
+            <GridListTile cols={1} rows={1}>
+              <Skeleton variant="rect" />
+            </GridListTile>
+          </GridList>
+        </div>
+      )
+    }
+
+    //if here, then there should be a displayRecord to pull from
+
+    photosList = props.listing.pictures;
+
     console.log(photosList);
     photosList = photosList.map((imgName) => {
         // TODO hardcoded for jpg
