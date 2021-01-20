@@ -15,14 +15,30 @@ app.get('/', (req, res) => {
   res.status(200).send('Server Firing');
 });
 
+app.get('/listing/all', (req, res) => {
+  console.log('get all listings');
+  const query = Locations.where();
+  query.find()
+    .then( (records) => {
+      if(records) {
+        //TODO empty check?
+        res.send(records);
+      }
+    })
+    .catch( (err) => {
+      res.status(500).send('Error fetching listings from database: ', err);
+    });
+});
+
+
 //TODO - make a param, for testing Dosh, we are just doing one for pictures
 app.get('/listing/:listingId', (req, res) => {
   console.log('get specified listing: ', req.params.listingId);
-  const query = Locations.where({title: 'Test'});
+  const query = Locations.where({_id: req.params.listingId});
   query.findOne((err, record) => {
     if(err) {
       console.log('error retrieving record: ', err);
-      res.status.send('Error fetching listing from database: ', err);
+      res.status(500).send('Error fetching listing from database: ', err);
     } else if (record) {
       res.send(record);
     }
