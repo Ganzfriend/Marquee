@@ -17,12 +17,13 @@ app.get('/', (req, res) => {
 
 app.get('/listing/all', (req, res) => {
   console.log('get all listings');
-  const query = Locations.where();
-  query.find()
+  Locations.find()
     .then( (records) => {
-      if(records) {
-        //TODO empty check?
+      if(records.length > 0) {
         res.send(records);
+      } else {
+        //no records to be had, send no content message
+        res.status(204).send();
       }
     })
     .catch( (err) => {
@@ -39,10 +40,12 @@ app.get('/listing/:listingId', (req, res) => {
     if(err) {
       console.log('error retrieving record: ', err);
       res.status(500).send('Error fetching listing from database: ', err);
-    } else if (record) {
+    } else if (record.length > 0) {
       res.send(record);
+    } else {
+      res.status(404).send('Cannot find listing with id: ', req.params.listingId);
     }
-    //TODO add 404 if query succeeds but record is empty
+    
   })
 });
 
