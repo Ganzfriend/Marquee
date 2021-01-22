@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PhotoGrid from './PhotoGrid.jsx';
+import Title from './Title.jsx';
+import Divider from '@material-ui/core/Divider';
+import Policies from './Policies.jsx';
+import Description from './Description.jsx';
 const axios = require('axios');
 
 
@@ -34,8 +38,13 @@ class Marquee extends React.Component {
   render() {
       return (
           <div>
-            <h1>LOCATION TITLE</h1>
+            <Title listing={this.state.displayRecord} />
             <PhotoGrid listing={this.state.displayRecord} />
+            <Divider />
+            <Policies listing={this.state.displayRecord} />
+            <Divider />
+            <Description listing={this.state.displayRecord} />
+            <Divider />
           </div>
       );
   }
