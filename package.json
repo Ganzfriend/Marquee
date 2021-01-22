@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node server/index.js",
     "dev": "webpack --mode development -w",
     "build": "webpack --mode production",
-    "db-seed": "node database/seed.js",
+    "db-seed": "node database/seed_2.js",
     "test": "jest"
   },
   "repository": {

@@ -8,7 +8,8 @@ const locationSchema = new mongoose.Schema({
   rating: Number,
   pictures: Array,
   guests: Number,
-  bedrooms: Number,
+  bedrooms: Array,
+  bathrooms: Number,
   price: Number,
   description: String,
   amenities: Array
