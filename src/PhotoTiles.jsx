@@ -1,5 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      width: 600,
+      width: 800,
       height: 400,
     },
   }));
@@ -78,20 +79,3 @@ const useStyles = makeStyles((theme) => ({
   }
 
   export default PhotoTiles;
-
-  /*
-    return (
-      <div className={classes.root}>
-        <GridList cellHeight={160} className={classes.gridList} cols={3} rows={2}>
-        {mainTile}
-        {photosList.map((tile) => (
-          <GridListTile key={tile} cols={1} rows={1}>
-            <img src={tile} />
-          </GridListTile>
-        ))}
-        </GridList>
-      </div>
-    );
-
-
-  */

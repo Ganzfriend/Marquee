@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PhotoTiles from './PhotoTiles.jsx';
+import PhotoGrid from './PhotoGrid.jsx';
 const axios = require('axios');
 
 
@@ -34,8 +34,8 @@ class Marquee extends React.Component {
   render() {
       return (
           <div>
-            <PhotoTiles listing={this.state.displayRecord} />
-            
+            <h1>LOCATION TITLE</h1>
+            <PhotoGrid listing={this.state.displayRecord} />
           </div>
       );
   }
