@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const PORT = 3003;
 const path = require('path');
 
-const Locations = require('../database/Locations.js');
+import { allListings, listingWithId} from '../database/queries.js';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.get('/listing/all', (req, res) => {
   console.log('get all listings');
-  Locations.find()
+  allListings()
     .then( (records) => {
       if(records.length > 0) {
         res.send(records);
@@ -35,18 +35,17 @@ app.get('/listing/all', (req, res) => {
 //TODO - make a param, for testing Dosh, we are just doing one for pictures
 app.get('/listing/:listingId', (req, res) => {
   console.log('get specified listing: ', req.params.listingId);
-  const query = Locations.where({_id: req.params.listingId});
-  query.findOne((err, record) => {
-    if(err) {
-      console.log('error retrieving record: ', err);
+  listingWithId(req.params.listingId)
+    .then( (record) => {
+      if(record) {
+        res.send(record)
+      } else {
+        res.status(404).send('Cannot find listing with id: ', req.params.listingId);
+      }
+    })
+    .catch( (err) => {
       res.status(500).send('Error fetching listing from database: ', err);
-    } else if (record.length > 0) {
-      res.send(record);
-    } else {
-      res.status(404).send('Cannot find listing with id: ', req.params.listingId);
-    }
-    
-  })
+    })
 });
 
 app.listen(PORT, () => {console.log('App listening on port: ', PORT)});
