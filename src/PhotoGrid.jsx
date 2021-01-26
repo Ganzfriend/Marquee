@@ -14,28 +14,18 @@ var PhotoGrid = (props) => {
   } else {  //if not null, should mean we have a displayRecord to pull from
     photosList = props.listing.pictures.map( (imgName) => {
       // hardcoded for jpg
-      return (<img src={OBJECT_URL + imgName + '.jpg'} />)
+      return `${OBJECT_URL}${imgName}.jpg`;
     });
   }
 
 
   return (
     <div className="photo-grid">
-      <div className="photo-item main-photo-item">
-        {photosList[0]}
-      </div>
-      <div className="photo-item item-a">
-        {photosList[1]}
-      </div>
-      <div className="photo-item item-b">
-        {photosList[2]}
-      </div>
-      <div className="photo-item item-c">
-        <Skeleton variant="rect" />
-      </div>
-      <div className="photo-item item-d">
-        <Skeleton variant="rect" />
-      </div>
+      <img className="main-photo-item" src={photosList[0]} />
+      <img className="photo-item item-a" src={photosList[1]} />
+      <img className="photo-item item-b" src={photosList[2]} />
+      <img className="photo-item item-c" src={photosList[3]} />
+      <img className="photo-item item-d" src={photosList[4]} />
     </div>
   )
 }
