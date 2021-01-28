@@ -22,7 +22,7 @@ class Marquee extends React.Component {
   }
 
   getListingFromServer() {
-    axios.get('/listing/600a6b89cac7839e11ac6fba')
+    axios.get('/listing/random')
       .then((response) => {
         console.log('received listing from server: ', response);
         this.setState({displayRecord: response.data})

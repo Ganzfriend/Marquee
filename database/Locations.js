@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const db = require('./index.js');
 
 const locationSchema = new mongoose.Schema({
+  id: Number,
   title: String,
   host: String,
   location: String,
