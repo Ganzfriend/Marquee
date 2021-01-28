@@ -7,6 +7,7 @@ import Policies from './Policies.jsx';
 import Description from './Description.jsx';
 import Sleeping from './Sleeping.jsx';
 import Amenities from './Amenities.jsx';
+import './fashion.css';
 const axios = require('axios');
 
 
@@ -21,7 +22,7 @@ class Marquee extends React.Component {
   }
 
   getListingFromServer() {
-    axios.get('/listing/600a6b89cac7839e11ac6fba')
+    axios.get('/listing/random')
       .then((response) => {
         console.log('received listing from server: ', response);
         this.setState({displayRecord: response.data})
@@ -39,7 +40,7 @@ class Marquee extends React.Component {
 
   render() {
       return (
-          <div>
+          <div className="marquee-app">
             <Title listing={this.state.displayRecord} />
             <PhotoGrid listing={this.state.displayRecord} />
             <Divider />

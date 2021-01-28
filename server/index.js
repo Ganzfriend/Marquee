@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = 3003;
+const PORT = 3004;
 const path = require('path');
 
 import { allListings, listingWithId} from '../database/queries.js';
+
+var seeder = require('../database/seed_3.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,6 +33,23 @@ app.get('/listing/all', (req, res) => {
     });
 });
 
+app.get('/listing/random', (req, res) => {
+  console.log('get random listinge');
+  allListings()
+    .then( (records) => {
+      if(records.length > 0) {
+        var myRecord = records[Math.floor(Math.random() * records.length)];
+        res.send(myRecord);
+      } else {
+        //no records to be had, send no content message
+        res.status(204).send();
+      }
+    })
+    .catch( (err) => {
+      res.status(500).send('Error fetching listings from database: ', err);
+    });
+});
+
 
 //TODO - make a param, for testing Dosh, we are just doing one for pictures
 app.get('/listing/:listingId', (req, res) => {
@@ -47,5 +66,7 @@ app.get('/listing/:listingId', (req, res) => {
       res.status(500).send('Error fetching listing from database: ', err);
     })
 });
+
+
 
 app.listen(PORT, () => {console.log('App listening on port: ', PORT)});
