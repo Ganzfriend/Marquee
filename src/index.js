@@ -1,59 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PhotoGrid from './PhotoGrid.jsx';
-import Title from './Title.jsx';
-import Divider from '@material-ui/core/Divider';
-import Policies from './Policies.jsx';
-import Description from './Description.jsx';
-import Sleeping from './Sleeping.jsx';
-import Amenities from './Amenities.jsx';
-import './fashion.css';
-const axios = require('axios');
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import Marquee from './Marquee.jsx';
 
-
-class Marquee extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      displayRecord: null
+class App extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+      };
     }
+  
+    
 
-    this.getListingFromServer = this.getListingFromServer.bind(this);
-  }
-
-  getListingFromServer() {
-    axios.get('/listing/random')
-      .then((response) => {
-        console.log('received listing from server: ', response);
-        this.setState({displayRecord: response.data})
-      })
-      .catch((error) => {
-        console.log('error fetching listing from server', error);
-      });
-  }
-
-  componentDidMount() {
-    if (this.state.displayRecord === null) {
-      this.getListingFromServer();
-    }
-  }
-
-  render() {
+    render() {
+      // eslint-disable-next-line no-unused-vars
       return (
-          <div className="marquee-app">
-            <Title listing={this.state.displayRecord} />
-            <PhotoGrid listing={this.state.displayRecord} />
-            <Divider />
-            <Policies listing={this.state.displayRecord} />
-            <Divider />
-            <Description listing={this.state.displayRecord} />
-            <Divider />
-            <Sleeping listing={this.state.displayRecord} />
-            <Divider />
-            <Amenities listing={this.state.displayRecord} />
-          </div>
+        <HashRouter>
+          <Switch>
+            <Route path='/listing/:id'>
+              <div>
+                <Marquee />
+              </div>
+            </Route>
+          </Switch>
+        </HashRouter>
       );
+    }
   }
-}
-
-ReactDOM.render(<Marquee />, document.getElementById('marquee'));
+  
+  //export default App;
+ReactDOM.render(<App />, document.getElementById('marquee'));
