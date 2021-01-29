@@ -12,12 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use('/listing',express.static(path.join(__dirname, '..', 'dist')));
+app.use('/listing/*',express.static(path.join(__dirname, '..', 'dist')));
+
 
 app.get('/', (req, res) => {
   res.status(200).send('Server Firing');
 });
 
-app.get('/listing/all', (req, res) => {
+app.get('/api/listing/all', (req, res) => {
   console.log('get all listings');
   allListings()
     .then( (records) => {
@@ -33,7 +36,7 @@ app.get('/listing/all', (req, res) => {
     });
 });
 
-app.get('/listing/random', (req, res) => {
+app.get('/api/listing/random', (req, res) => {
   console.log('get random listinge');
   allListings()
     .then( (records) => {
@@ -52,7 +55,7 @@ app.get('/listing/random', (req, res) => {
 
 
 //TODO - make a param, for testing Dosh, we are just doing one for pictures
-app.get('/listing/:listingId', (req, res) => {
+app.get('/api/listing/:listingId', (req, res) => {
   console.log('get specified listing: ', req.params.listingId);
   listingWithId(req.params.listingId)
     .then( (record) => {

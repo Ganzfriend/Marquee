@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node server/index.js",
     "dev": "webpack --mode development -w",
     "build": "webpack --mode production",
-    "db-seed": "node database/seed_3.js",
+    "db-seed": "node database/seed_4.js",
     "test": "jest"
   },
   "repository": {
@@ -32,7 +32,9 @@
     "mongoose": "^5.11.11",
     "nodemon": "^2.0.7",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-router-prop-types": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
