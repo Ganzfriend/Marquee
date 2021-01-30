@@ -5,4 +5,4 @@ COPY . /marquee/app
 RUN npm install
 ENV MONGODBURL='mongodb://database/marquee'
 EXPOSE 3004
-CMD [ "npm", "start" ]
+CMD [ "node", "server/index.js" ]
