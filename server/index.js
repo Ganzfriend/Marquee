@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const PORT = 3004;
 const path = require('path');
+const cors = require('cors');
 
 import { allListings, listingWithId} from '../database/queries.js';
 
@@ -10,6 +11,7 @@ var seeder = require('../database/seed_3.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 app.use('/listing',express.static(path.join(__dirname, '..', 'dist')));
