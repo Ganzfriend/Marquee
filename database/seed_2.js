@@ -1,4 +1,4 @@
-const db = require('./index.js');
+const db = require('mongoose');
 const Locations = require('./Locations.js');
 
 const sampleLocations_2 = [
@@ -29,13 +29,13 @@ const sampleLocations_2 = [
     Home of Elvis and the ancient Greeks Do I smell? I smell home cooking \
     Its only the river, its only the river',
     amenities: ['heat', 'AC']
-    
+
   },
 ];
 
 const insertSampleLocations_2 = function() {
   Locations.create(sampleLocations_2)
-    .then( () => db.close());
+    .then(db.disconnect);
 };
 
 insertSampleLocations_2();

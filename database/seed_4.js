@@ -1,28 +1,27 @@
-const db = require('./index.js');
+const db = require('mongoose');
 const Locations = require('./Locations.js');
-var seedObjs = require('./seed_objs.js');
-var alec_seedObjs = require('./alec_seedObjs.js')
+const seedObjs = require('./seed_objs.js');
+const alec_seedObjs = require('./alec_seedObjs.js');
 
-const pickMany = function(quantity, inList) {
-  var retArr = [];
+const pickMany = function (quantity, inList) {
+  const retArr = [];
   for (let i = 0; i < quantity; i++) {
-    let choice = Math.floor(Math.random() * inList.length);
+    const choice = Math.floor(Math.random() * inList.length);
     retArr.push(inList[choice]);
   }
   return retArr;
 };
 
-const pickOne = function(inList) {
-  let choice = Math.floor(Math.random() * inList.length);
+const pickOne = function (inList) {
+  const choice = Math.floor(Math.random() * inList.length);
   return inList[choice];
-  
 };
 
-const insertSamples_4 = function(numLocations) {
-  var insertArray = [];
+const insertSamples_4 = function (numLocations) {
+  const insertArray = [];
   for (let i = 0; i < numLocations; i++) {
-    let tempLocation = {};
- 
+    const tempLocation = {};
+
     tempLocation.id = i + 1;
 
     tempLocation.title = alec_seedObjs.titles[i];
@@ -37,7 +36,7 @@ const insertSamples_4 = function(numLocations) {
 
     tempLocation.guests = Math.ceil(Math.random() * 10);
 
-    tempLocation.bedrooms = pickMany( Math.ceil(Math.random() * 4), seedObjs.bedroomsBag);
+    tempLocation.bedrooms = pickMany(Math.ceil(Math.random() * 4), seedObjs.bedroomsBag);
 
     tempLocation.bathrooms = Math.ceil(Math.random() * 10);
 
@@ -51,12 +50,11 @@ const insertSamples_4 = function(numLocations) {
   }
 
   Locations.create(insertArray)
-    .then( () => {
+    .then(() => {
       console.log('seed data stored in database');
-      db.close();
-    })
+      db.disconnect();
+    });
 };
-
 
 exports.insertSamples_4 = insertSamples_4;
 
