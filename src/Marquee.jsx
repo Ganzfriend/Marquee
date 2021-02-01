@@ -30,7 +30,7 @@ const Marquee = () => {
   }, [id]);
 
   var getListingFromServer = (id = 'random') => {
-    axios.get(`/api/listing/${id}`)
+    axios.get(`http://3.101.149.145:3004/api/listing/${id}`)
       .then((response) => {
         console.log('received listing from server: ', response);
         setDisplayRecord(response.data);
