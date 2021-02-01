@@ -1,5 +1,4 @@
-FROM node:latest
-RUN mkdir -p /marquee/app
+FROM node:15.7.0
 WORKDIR /marquee/app
 COPY . /marquee/app
 RUN npm install
